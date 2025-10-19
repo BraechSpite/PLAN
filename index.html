@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>60-Day VPS Launch Plan — Anime God Mode</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff00ff;
+      --secondary: #00ffff;
+      --accent: #ff9900;
+      --dark: #0a0a1a;
+      --darker: #050510;
+      --light: #ffffff;
+      --success: #00ff99;
+      --warning: #ffcc00;
+      --danger: #ff3366;
+      --anime-blue: #00aaff;
+      --anime-purple: #aa00ff;
+      --anime-pink: #ff00aa;
+      --anime-yellow: #ffcc00;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Kanit', sans-serif;
+      background: var(--darker);
+      color: var(--light);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .anime-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--anime-purple), transparent);
+      opacity: 0.3;
+      animation: float 15s infinite linear;
+    }
+
+    .particle:nth-child(2n) {
+      background: radial-gradient(circle, var(--anime-pink), transparent);
+      animation-duration: 12s;
+    }
+
+    .particle:nth-child(3n) {
+      background: radial-gradient(circle, var(--anime-blue), transparent);
+      animation-duration: 18s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.4; }
+      100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, rgba(10, 10, 26, 0.8), rgba(5, 5, 16, 0.9));
+      border-bottom: 2px solid var(--primary);
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { text-shadow: 0 0 15px rgba(255, 0, 255, 0.5); }
+      100% { text-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 40px rgba(255, 153, 0, 0.6); }
+    }
+
+    .subtitle {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--secondary);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .stat-card {
+      background: rgba(10, 10, 26, 0.7);
+      border: 1px solid var(--secondary);
+      border-radius: 15px;
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+      min-width: 180px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 25px rgba(0, 255, 255, 0.4);
+      border-color: var(--primary);
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--light);
+      opacity: 0.8;
+    }
+
+    .week-selector {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 2rem auto;
+      max-width: 1200px;
+      padding: 0 1rem;
+    }
+
+    .week-btn {
+      background: rgba(20, 20, 40, 0.7);
+      border: 2px solid var(--anime-blue);
+      color: var(--light);
+      padding: 0.8rem 1.2rem;
+      border-radius: 50px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+    }
+
+    .week-btn:hover {
+      background: rgba(0, 170, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 170, 255, 0.4);
+    }
+
+    .week-btn.active {
+      background: linear-gradient(90deg, var(--anime-purple), var(--anime-pink));
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 0 20px rgba(170, 0, 255, 0.6);
+      transform: scale(1.05);
+    }
+
+    .week-details {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+
+    .week-header {
+      background: linear-gradient(135deg, rgba(20, 20, 40, 0.8), rgba(10, 10, 26, 0.9));
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+    }
+
+    .week-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .week-subtitle {
+      font-size: 1.4rem;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .week-meta {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .meta-item {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      min-width: 150px;
+      border: 1px solid var(--secondary);
+    }
+
+    .meta-label {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .meta-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--light);
+    }
+
+    .tasks-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .task-card {
+      background: rgba(20, 20, 40, 0.7);
+      border: 2px solid var(--anime-blue);
+      border-radius: 20px;
+      padding: 1.8rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .task-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 25px rgba(255, 0, 255, 0.4);
+    }
+
+    .task-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    }
+
+    .task-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--anime-purple), var(--anime-pink));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(170, 0, 255, 0.5);
+    }
+
+    .task-icon i {
+      font-size: 28px;
+      color: white;
+    }
+
+    .task-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--light);
+    }
+
+    .task-day {
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .task-items {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .task-items li {
+      padding: 0.8rem 0;
+      padding-left: 30px;
+      position: relative;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .task-items li:last-child {
+      border-bottom: none;
+    }
+
+    .task-items li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background: var(--success);
+      color: var(--darker);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .trick-box {
+      background: linear-gradient(135deg, rgba(255, 204, 0, 0.15), rgba(255, 102, 0, 0.1));
+      border: 2px solid var(--warning);
+      border-radius: 15px;
+      padding: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trick-box::before {
+      content: '🔥';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 40px;
+      height: 40px;
+      background: var(--warning);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    .trick-text {
+      font-weight: 700;
+      color: var(--warning);
+      font-size: 1.1rem;
+    }
+
+    /* Section Headers */
+    .section-header {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      text-align: center;
+      margin: 4rem 0 2rem;
+      background: linear-gradient(90deg, var(--anime-yellow), var(--anime-pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+    }
+
+    /* Tricks Section */
+    .tricks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .trick-card {
+      background: rgba(30, 30, 50, 0.7);
+      border: 2px solid var(--anime-yellow);
+      border-radius: 18px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .trick-card:hover {
+      transform: scale(1.02);
+      border-color: var(--warning);
+      box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
+    }
+
+    .trick-number {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: var(--warning);
+      color: var(--darker);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 32px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .trick-title {
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 0.5rem;
+    }
+
+    .trick-desc {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .trick-impact {
+      background: rgba(0, 255, 153, 0.15);
+      color: var(--success);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    /* Timeline */
+    .timeline-item {
+      background: rgba(20, 20, 40, 0.7);
+      border: 1px solid var(--anime-green);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-bar {
+      height: 12px;
+      background: #444;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+
+    .timeline-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success), var(--secondary));
+      border-radius: 6px;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .metric-card {
+      background: rgba(20, 20, 40, 0.7);
+      border-radius: 16px;
+      padding: 1.8rem;
+      text-align: center;
+      border: 1px solid var(--anime-purple);
+    }
+
+    .metric-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .metric-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    .metric-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: var(--success);
+    }
+
+    /* Channel Breakdown */
+    .channel-card {
+      background: rgba(20, 20, 40, 0.7);
+      border-left: 4px solid var(--anime-blue);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .channel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .channel-name {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .channel-pct {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: var(--success);
+    }
+
+    /* Routine Grid */
+    .routine-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .routine-card {
+      background: rgba(20, 20, 40, 0.7);
+      border-radius: 16px;
+      padding: 1.8rem;
+      border: 1px solid var(--anime-pink);
+    }
+
+    .routine-title {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      color: var(--anime-pink);
+    }
+
+    .routine-list {
+      list-style: none;
+    }
+
+    .routine-list li {
+      padding: 0.6rem 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .routine-step {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: var(--anime-pink);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 24px;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, var(--success), var(--secondary));
+      border-radius: 24px;
+      padding: 3rem;
+      text-align: center;
+      margin: 4rem 0;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+    }
+
+    .final-cta h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--darker);
+    }
+
+    .final-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .final-stat {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1.2rem 2rem;
+      border-radius: 16px;
+      min-width: 180px;
+    }
+
+    .final-stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: var(--darker);
+      font-weight: 700;
+    }
+
+    .final-note {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: var(--darker);
+      font-weight: 600;
+    }
+
+    .print-btn {
+      background: linear-gradient(90deg, var(--anime-purple), var(--anime-pink));
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 2rem;
+      box-shadow: 0 5px 20px rgba(170, 0, 255, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .print-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 0, 255, 0.8);
+    }
+
+    @media (max-width: 768px) {
+      .logo { font-size: 2.5rem; }
+      .subtitle { font-size: 1.4rem; }
+      .week-title { font-size: 2rem; }
+      .task-title { font-size: 1.5rem; }
+      .tasks-container,
+      .tricks-grid,
+      .metrics-grid,
+      .routine-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="anime-bg" id="animeBg"></div>
+
+  <!-- HEADER -->
+  <header>
+    <h1 class="logo">60-DAY VPS LAUNCH PLAN</h1>
+    <p class="subtitle">From $0 to $600/month in Anime God Mode</p>
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-value">$600+</div>
+        <div class="stat-label">Target Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">50-60</div>
+        <div class="stat-label">Target Customers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">97%</div>
+        <div class="stat-label">Profit Margin</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- WEEK SELECTOR -->
+  <div class="week-selector" id="weekSelector"></div>
+
+  <!-- WEEK DETAILS -->
+  <div class="week-details" id="weekDetails"></div>
+
+  <!-- TOP 10 TRICKS -->
+  <h2 class="section-header">🔥 TOP 10 CUSTOMER ACQUISITION TRICKS</h2>
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="text-center text-xl mb-6 text-gray-300">These are the REAL tactics that work. Not theory — proven methods.</p>
+    <div class="tricks-grid" id="tricksGrid"></div>
+  </div>
+
+  <!-- TIMELINE -->
+  <h2 class="section-header">📊 EXPECTED PROGRESS TIMELINE</h2>
+  <div class="max-w-4xl mx-auto px-4" id="timelineContainer"></div>
+
+  <!-- METRICS -->
+  <h2 class="section-header">🎯 KEY SUCCESS METRICS</h2>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="metrics-grid" id="metricsGrid"></div>
+  </div>
+
+  <!-- CHANNELS -->
+  <h2 class="section-header">📱 MARKETING CHANNEL BREAKDOWN</h2>
+  <div class="max-w-4xl mx-auto px-4" id="channelsContainer"></div>
+
+  <!-- ROUTINE -->
+  <h2 class="section-header">⏰ YOUR DAILY ROUTINE (2 HOURS/DAY)</h2>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="routine-grid" id="routineGrid"></div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="final-cta">
+      <h2>🚀 YOU'RE READY TO LAUNCH!</h2>
+      <p class="text-xl">This plan is REALISTIC and ACHIEVABLE. It's not a get-rich-quick scheme.</p>
+      <div class="final-stats">
+        <div class="final-stat">
+          <div class="final-stat-value">$594</div>
+          <div>Monthly Profit</div>
+        </div>
+        <div class="final-stat">
+          <div class="final-stat-value">$7,128</div>
+          <div>Yearly Profit</div>
+        </div>
+        <div class="final-stat">
+          <div class="final-stat-value">2 hrs/day</div>
+          <div>Time Required</div>
+        </div>
+      </div>
+      <div class="final-note">
+        START TODAY. NOT TOMORROW. TODAY.<br>
+        Even 5 customers = $600/year profit. You literally can't lose!
+      </div>
+      <button class="print-btn" onclick="window.print()">
+        📄 PRINT / SAVE AS PDF
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // === DATA FROM YOUR REACT CODE ===
+    const weeks = [
+      {
+        week: 1,
+        title: "Foundation & Setup",
+        days: "Days 1-7",
+        theme: "Build the Machine",
+        revenue: "$0",
+        customers: 0,
+        tasks: [
+          {
+            day: "Day 1-2",
+            title: "Bot Enhancement",
+            icon: "fas fa-bolt",
+            items: [
+              "Add /buy command with Stripe payment",
+              "Set up $10/month USD pricing",
+              "Add auto-provisioning after payment",
+              "Test payment flow 3 times",
+              "Create receipt/invoice system"
+            ],
+            trick: "🎯 TRICK: Offer $5/month for first 20 customers (50% off FOREVER) - Creates urgency!"
+          },
+          {
+            day: "Day 3",
+            title: "Landing Page",
+            icon: "fas fa-bullseye",
+            items: [
+              "Simple one-page HTML site",
+              "Headline: 'Deploy Python Projects via Telegram - $10/month'",
+              "3 pricing tiers: $10, $15, $25",
+              "Telegram bot link prominent",
+              "Deploy on GitHub Pages (FREE)"
+            ],
+            trick: "🎯 TRICK: Add fake 'Jane from Seattle just signed up!' notifications for social proof"
+          },
+          {
+            day: "Day 4-5",
+            title: "Content Preparation",
+            icon: "fas fa-comment-alt",
+            items: [
+              "Write 5 Reddit posts (different angles)",
+              "Create 3-minute demo video",
+              "Take 10 screenshots of bot in action",
+              "Write comparison chart vs DigitalOcean",
+              "Prepare 'First 20 get $5/month' graphic"
+            ],
+            trick: "🎯 TRICK: Use 'I built this for myself' story - more authentic than sales pitch"
+          },
+          {
+            day: "Day 6-7",
+            title: "Account Setup",
+            icon: "fas fa-users",
+            items: [
+              "Create Twitter @DevSlotHost",
+              "Join 10 Discord servers (Python, webdev, programming)",
+              "Join 5 Facebook dev groups",
+              "Create Indie Hackers account",
+              "Set up Stripe + test payment"
+            ],
+            trick: "🎯 TRICK: Don't mention your service first - help people for 2-3 days, build trust FIRST"
+          }
+        ]
+      },
+      {
+        week: 2,
+        title: "First Customer Sprint",
+        days: "Days 8-14",
+        theme: "Get 5 Paying Customers",
+        revenue: "$25-50",
+        customers: "5-10",
+        tasks: [
+          {
+            day: "Day 8",
+            title: "Reddit Launch",
+            icon: "fas fa-share-alt",
+            items: [
+              "Post in r/webdev: 'I built $10 Python hosting'",
+              "Post in r/Python: 'Cheap hosting for bots'",
+              "Post in r/sideproject: Show your bot",
+              "Engage in comments for 2 hours",
+              "Offer first 5 commenters $3/month"
+            ],
+            trick: "🎯 TRICK: Title formula: 'I [action] because I was frustrated with [pain point]' - Gets 10x more clicks!"
+          },
+          {
+            day: "Day 9-10",
+            title: "Discord Soft Sell",
+            icon: "fas fa-comment-alt",
+            items: [
+              "Answer 5 questions in Python Discord",
+              "Help someone with deployment issue",
+              "Share your solution naturally",
+              "When they ask, DM them offer",
+              "Give them $2/month for feedback"
+            ],
+            trick: "🎯 TRICK: Don't spam! Give value first. Ratio: 10 helpful comments → 1 mention of your service"
+          },
+          {
+            day: "Day 11-12",
+            title: "Twitter Hustle",
+            icon: "fas fa-chart-line",
+            items: [
+              "Tweet: 'Building in public: Day 1 of my $10 hosting'",
+              "Share revenue screenshot (even if $0)",
+              "Reply to 20 devs complaining about Heroku",
+              "Use hashtags: #buildinpublic #indiehackers",
+              "DM 5 people your offer"
+            ],
+            trick: "🎯 TRICK: Screenshot your $0 revenue with 'Day 1 - Let's get to $100!' - People love underdog stories"
+          },
+          {
+            day: "Day 13-14",
+            title: "Indie Hackers Play",
+            icon: "fas fa-users",
+            items: [
+              "Post: 'Launching $10 Python hosting - feedback?'",
+              "Share your tech stack",
+              "Ask for roast/critique",
+              "Engage with 10 other makers",
+              "Offer 3 lifetime free accounts for detailed feedback"
+            ],
+            trick: "🎯 TRICK: Ask for critique, not customers. People love giving advice. 30% will ask 'where can I sign up?'"
+          }
+        ]
+      },
+      {
+        week: 3,
+        title: "Content Explosion",
+        days: "Days 15-21",
+        theme: "10x Your Visibility",
+        revenue: "$100-150",
+        customers: "10-15",
+        tasks: [
+          {
+            day: "Day 15-16",
+            title: "Blog Blitz",
+            icon: "fas fa-comment-alt",
+            items: [
+              "Write Dev.to article: 'Deploy Python in 60 seconds'",
+              "Write Hashnode: '$10 hosting vs $50 hosting'",
+              "Write Medium: 'I built hosting with just Telegram'",
+              "Include code snippets + screenshots",
+              "CTA: 'Try it free for 3 days'"
+            ],
+            trick: "🎯 TRICK: Title with numbers wins: '5 reasons I built this' or '3 ways to deploy faster' - Gets 3x more clicks"
+          },
+          {
+            day: "Day 17-18",
+            title: "Video Content",
+            icon: "fas fa-bolt",
+            items: [
+              "Record 60-second deploy tutorial",
+              "Post on YouTube Shorts, TikTok, IG Reels",
+              "Tweet the video",
+              "Post in Discord #showcase channels",
+              "Comment on 10 Python tutorial videos"
+            ],
+            trick: "🎯 TRICK: End video with 'Link in bio for $5/month' - Urgency + scarcity = conversions"
+          },
+          {
+            day: "Day 19-20",
+            title: "Partnership Outreach",
+            icon: "fas fa-users",
+            items: [
+              "Email 10 coding YouTubers (10k-100k subs)",
+              "Offer: Free lifetime account for review",
+              "DM 5 tech Twitter influencers",
+              "Comment on their posts first (build rapport)",
+              "Prepare affiliate program: 30% commission"
+            ],
+            trick: "🎯 TRICK: Subject line: 'Quick question about [their recent video]' - Gets 50% open rate vs 'Partnership opportunity'"
+          },
+          {
+            day: "Day 21",
+            title: "Referral Launch",
+            icon: "fas fa-gift",
+            items: [
+              "Add /referral command to bot",
+              "Give unique referral links",
+              "Reward: Refer 3 = your slot FREE",
+              "Message all existing customers",
+              "Post on Twitter: 'Refer friends, get free hosting'"
+            ],
+            trick: "🎯 TRICK: First 5 referrers get LIFETIME free + $20 cash - Your customers become salespeople!"
+          }
+        ]
+      },
+      {
+        week: 4,
+        title: "Conversion Machine",
+        days: "Days 22-28",
+        theme: "Optimize & Scale",
+        revenue: "$150-200",
+        customers: "15-20",
+        tasks: [
+          {
+            day: "Day 22-23",
+            title: "Social Proof Build",
+            icon: "fas fa-check-circle",
+            items: [
+              "Ask 3 happy customers for testimonials",
+              "Screenshot their positive messages",
+              "Create 'Customer Stories' page",
+              "Tweet testimonials daily",
+              "Add to landing page"
+            ],
+            trick: "🎯 TRICK: Offer $5 credit for video testimonial - Video converts 10x better than text"
+          },
+          {
+            day: "Day 24-25",
+            title: "Free Trial Push",
+            icon: "fas fa-gift",
+            items: [
+              "Add 3-day free trial (no credit card)",
+              "After 3 days: 'Loving it? Subscribe now'",
+              "Post on Reddit: 'Free 3-day trial'",
+              "30% will convert to paid",
+              "Track conversion rate"
+            ],
+            trick: "🎯 TRICK: Send reminder 2 hours before trial ends with 'Your project will stop in 2 hours' - Fear of loss works!"
+          },
+          {
+            day: "Day 26-27",
+            title: "Facebook Groups",
+            icon: "fas fa-users",
+            items: [
+              "Join 10 programming Facebook groups",
+              "Post in 'Self-Promotion Sunday' threads",
+              "Share your story, not sales pitch",
+              "Engage with 20 posts first",
+              "Offer group-exclusive discount"
+            ],
+            trick: "🎯 TRICK: Create a meme about expensive hosting, post it. Gets shared 10x more than promotional posts!"
+          },
+          {
+            day: "Day 28",
+            title: "Week 4 Review",
+            icon: "fas fa-chart-line",
+            items: [
+              "Analyze what worked best",
+              "Track: Reddit vs Discord vs Twitter",
+              "Calculate customer acquisition cost",
+              "Double down on best channel",
+              "Pause worst performing channel"
+            ],
+            trick: "🎯 TRICK: If Reddit works best (likely), post there 3x per week. Focus beats spreading thin!"
+          }
+        ]
+      },
+      {
+        week: 5,
+        title: "Scaling Phase",
+        days: "Days 29-35",
+        theme: "Hit 25 Customers",
+        revenue: "$250-300",
+        customers: "25-30",
+        tasks: [
+          {
+            day: "Day 29-30",
+            title: "Paid Ads Test",
+            icon: "fas fa-dollar-sign",
+            items: [
+              "Spend $20 on Reddit ads (r/learnprogramming)",
+              "Target: 'Deploy Python projects easily'",
+              "Track conversions carefully",
+              "If ROI positive, scale to $50/week",
+              "If negative, stop and focus organic"
+            ],
+            trick: "🎯 TRICK: Headline 'Struggling with deployment?' beats 'Best hosting' - Problem-focused wins!"
+          },
+          {
+            day: "Day 31-32",
+            title: "Community Building",
+            icon: "fas fa-users",
+            items: [
+              "Create Telegram group for customers",
+              "Share tips, help each other",
+              "You get direct feedback",
+              "Customers recruit friends",
+              "Post 'Customer success' stories"
+            ],
+            trick: "🎯 TRICK: Make your best customer an 'Ambassador' with free hosting - They'll recruit for you!"
+          },
+          {
+            day: "Day 33-34",
+            title: "Product Hunt Prep",
+            icon: "fas fa-bolt",
+            items: [
+              "Create Product Hunt listing",
+              "Gather 10 friends to upvote",
+              "Prepare maker story",
+              "Schedule for Tuesday/Wednesday",
+              "Engage in comments all day"
+            ],
+            trick: "🎯 TRICK: Launch at 12:01am PST Tuesday - Gives you full day to climb rankings. Top 5 = 100+ signups!"
+          },
+          {
+            day: "Day 35",
+            title: "Upsell Strategy",
+            icon: "fas fa-chart-line",
+            items: [
+              "Message customers on $10 plan",
+              "Offer: Upgrade to $15 for 2GB RAM",
+              "Or: Add backup for +$3/month",
+              "30% will upgrade",
+              "Easy revenue boost"
+            ],
+            trick: "🎯 TRICK: 'Your project is growing! Upgrade for 30% off' - Flattery + discount = conversions"
+          }
+        ]
+      },
+      {
+        week: 6,
+        title: "Double Down",
+        days: "Days 36-42",
+        theme: "Maximize Best Channel",
+        revenue: "$300-400",
+        customers: "30-40",
+        tasks: [
+          {
+            day: "Day 36-37",
+            title: "Reddit Domination",
+            icon: "fas fa-share-alt",
+            items: [
+              "Post progress update: 'Hit 30 customers!'",
+              "Share revenue screenshot",
+              "r/entrepreneur, r/startups, r/buildinpublic",
+              "Answer ALL comments",
+              "Offer 'Reddit-exclusive' 20% off"
+            ],
+            trick: "🎯 TRICK: Post on Friday 9am EST - Highest traffic time. Can 5x your views!"
+          },
+          {
+            day: "Day 38-39",
+            title: "Case Study Creation",
+            icon: "fas fa-comment-alt",
+            items: [
+              "Interview 3 happy customers",
+              "Write: 'How [Name] deployed 5 bots for $10'",
+              "Include metrics, screenshots",
+              "Post on blog, share everywhere",
+              "Tag the customer (they'll share too)"
+            ],
+            trick: "🎯 TRICK: Give customer $20 for detailed case study - They become your marketing team!"
+          },
+          {
+            day: "Day 40-41",
+            title: "Affiliate Program",
+            icon: "fas fa-gift",
+            items: [
+              "Set up 30% recurring commission",
+              "Reach out to tech bloggers",
+              "Offer: Write review, earn commission",
+              "Create affiliate dashboard",
+              "Pay out monthly"
+            ],
+            trick: "🎯 TRICK: First affiliate to get 5 customers gets $100 bonus - Creates competition!"
+          },
+          {
+            day: "Day 42",
+            title: "Week 6 Analysis",
+            icon: "fas fa-chart-line",
+            items: [
+              "Total revenue tracking",
+              "Customer acquisition cost",
+              "Best marketing channel",
+              "Churn rate check",
+              "Plan for scaling to 50+"
+            ],
+            trick: "🎯 TRICK: If at 30+ customers and profitable, consider 2nd VPS for expansion!"
+          }
+        ]
+      },
+      {
+        week: 7,
+        title: "Premium Push",
+        days: "Days 43-49",
+        theme: "Launch $25 Tier",
+        revenue: "$400-500",
+        customers: "35-45",
+        tasks: [
+          {
+            day: "Day 43-44",
+            title: "Premium Launch",
+            icon: "fas fa-bolt",
+            items: [
+              "Launch $25/month Pro tier (2GB RAM, 5GB storage)",
+              "Email all customers about upgrade",
+              "Post on Twitter: New premium tier",
+              "Target: Enterprise devs, agencies",
+              "Offer: First 10 get priority support"
+            ],
+            trick: "🎯 TRICK: Add 'Priority Support' to premium - Costs you nothing, adds perceived value!"
+          },
+          {
+            day: "Day 45-46",
+            title: "LinkedIn Outreach",
+            icon: "fas fa-users",
+            items: [
+              "Connect with 50 software engineers",
+              "Join dev groups",
+              "Post your journey story",
+              "Comment on 20 posts",
+              "DM warm connections only"
+            ],
+            trick: "🎯 TRICK: LinkedIn message: 'Saw your post about [topic], thought you'd like this' - Personal beats generic"
+          },
+          {
+            day: "Day 47-48",
+            title: "Twitter Growth",
+            icon: "fas fa-chart-line",
+            items: [
+              "Tweet daily revenue updates",
+              "Share customer wins",
+              "Reply to 30 tweets/day",
+              "Use #buildinpublic consistently",
+              "Run giveaway: RT for free month"
+            ],
+            trick: "🎯 TRICK: 'Comment your project and I'll give 3 people free hosting' - Engagement explosion!"
+          },
+          {
+            day: "Day 49",
+            title: "Customer Appreciation",
+            icon: "fas fa-gift",
+            items: [
+              "Thank all customers personally",
+              "Offer loyalty bonus: Month 3 = 20% off",
+              "Ask for feedback",
+              "Implement one requested feature",
+              "Share their projects on Twitter"
+            ],
+            trick: "🎯 TRICK: Feature a 'Customer of the Week' - They'll promote you to their network!"
+          }
+        ]
+      },
+      {
+        week: 8,
+        title: "Automation & Scale",
+        days: "Days 50-56",
+        theme: "Systemize Everything",
+        revenue: "$500-600",
+        customers: "45-55",
+        tasks: [
+          {
+            day: "Day 50-51",
+            title: "Onboarding Automation",
+            icon: "fas fa-bolt",
+            items: [
+              "Create welcome email sequence",
+              "Day 1: Welcome + tutorial",
+              "Day 3: Tips + tricks",
+              "Day 7: Upgrade offer",
+              "Reduces support time 50%"
+            ],
+            trick: "🎯 TRICK: Include video tutorial - Reduces support questions by 70%!"
+          },
+          {
+            day: "Day 52-53",
+            title: "SEO Content",
+            icon: "fas fa-comment-alt",
+            items: [
+              "Write 'Best Python hosting 2025'",
+              "Write 'DigitalOcean alternatives'",
+              "Write 'Cheap VPS for developers'",
+              "Post on your site + Medium",
+              "Long-term traffic source"
+            ],
+            trick: "🎯 TRICK: Include comparison table with competitors - Ranks higher + converts better!"
+          },
+          {
+            day: "Day 54-55",
+            title: "Expansion Planning",
+            icon: "fas fa-chart-line",
+            items: [
+              "If 50+ customers, plan 2nd VPS",
+              "Calculate: Revenue $500 - Cost $12 = $488 profit",
+              "Can afford 2nd VPS easily",
+              "Expand to 80-100 customer capacity",
+              "Hire VA for support if needed"
+            ],
+            trick: "🎯 TRICK: At 50 customers on one VPS, you're at $6,000/year profit - Time to scale!"
+          },
+          {
+            day: "Day 56",
+            title: "Week 8 Milestone",
+            icon: "fas fa-check-circle",
+            items: [
+              "Celebrate hitting target!",
+              "Share revenue publicly",
+              "Thank everyone who helped",
+              "Plan next 60 days",
+              "Consider hiring help"
+            ],
+            trick: "🎯 TRICK: Post 'Made $500 in 60 days' story on Indie Hackers - Goes viral, brings customers!"
+          }
+        ]
+      },
+      {
+        week: 9,
+        title: "Final Push",
+        days: "Days 57-60",
+        theme: "Hit $600/month Target",
+        revenue: "$600+",
+        customers: "55-60",
+        tasks: [
+          {
+            day: "Day 57-58",
+            title: "Flash Sale",
+            icon: "fas fa-dollar-sign",
+            items: [
+              "Run 48-hour flash sale",
+              "Tweet: '$5/month for next 10 customers'",
+              "Post everywhere",
+              "Creates FOMO",
+              "Likely get 5-10 signups"
+            ],
+            trick: "🎯 TRICK: Use countdown timer in posts - 'Only 6 slots left!' - Urgency converts!"
+          },
+          {
+            day: "Day 59",
+            title: "Results Documentation",
+            icon: "fas fa-chart-line",
+            items: [
+              "Write detailed 60-day report",
+              "Include revenue, customers, lessons",
+              "Post on Indie Hackers, Reddit",
+              "This post brings MORE customers",
+              "Becomes your best marketing"
+            ],
+            trick: "🎯 TRICK: Title: 'I made $600/month in 60 days - Here's how' - Gets shared everywhere!"
+          },
+          {
+            day: "Day 60",
+            title: "Celebration & Planning",
+            icon: "fas fa-check-circle",
+            items: [
+              "Review all metrics",
+              "Calculate actual profit",
+              "Plan next 90 days",
+              "Set new goal: $1000/month",
+              "Decide: Keep growing or maintain"
+            ],
+            trick: "🎯 TRICK: Whatever you achieved, share it. Even $200/month is inspiring to others!"
+          }
+        ]
+      }
+    ];
+
+    const tricks = [
+      { title: "The 'Built for Myself' Story", desc: "Don't sell. Tell your story: 'I was frustrated with expensive hosting, so I built this.' People buy from people, not businesses.", impact: "3x higher conversion" },
+      { title: "Fake It Till You Make It (Ethically)", desc: "Add 'John from NYC just signed up!' notifications. Use real names from your test accounts. Creates social proof.", impact: "40% more signups" },
+      { title: "The $5 Forever Hook", desc: "First 20 customers get $5/month FOREVER. Cost you: $100/month max. Value: Social proof + testimonials worth $1000s", impact: "Fills slots in 7 days" },
+      { title: "Reddit Formula", desc: "Post at 9am EST Tuesday-Thursday. Use 'I built' not 'Check out'. Respond to EVERY comment within 1 hour. Top post = 50+ signups", impact: "500% ROI on time" },
+      { title: "Discord Soft Sell", desc: "Ratio: Help 10 people → Mention service once. DM warm leads only. Give them $2/month for 'beta feedback' = guilt reciprocity", impact: "25% DM conversion" },
+      { title: "Twitter Building in Public", desc: "Tweet daily revenue even if $0. Share failures. People love underdog stories. Will root for you + buy from you.", impact: "Viral potential" },
+      { title: "Free Trial Trap (Good Way)", desc: "3-day trial, no credit card. 2 hours before end: 'Your project stops in 2 hours!' - Fear of loss converts 30%", impact: "30% trial→paid" },
+      { title: "Referral Explosion", desc: "First 5 people to refer 3 customers get lifetime free + $50 cash. They become your sales team for $150 total investment", impact: "15+ customers from 5 people" },
+      { title: "Video Testimonial Bribe", desc: "Offer $10 credit for 60-second video review. Post on Twitter, landing page. Video converts 10x better than text", impact: "10x conversion boost" },
+      { title: "Product Hunt Timing", desc: "Launch 12:01am PST Tuesday. Have 10 friends upvote immediately. Comment on every question. Top 5 = 100+ signups guaranteed", impact: "100+ signups in 1 day" }
+    ];
+
+    const timelineData = [
+      { week: "Week 2", revenue: "$25-50", width: "10%", desc: "5-10 customers • First Reddit posts go live" },
+      { week: "Week 4", revenue: "$150-200", width: "33%", desc: "15-20 customers • Content marketing paying off" },
+      { week: "Week 6", revenue: "$300-400", width: "66%", desc: "30-40 customers • Referrals kicking in" },
+      { week: "Week 8 (Day 60)", revenue: "$600+", width: "100%", desc: "55-60 customers • TARGET ACHIEVED! 🎉" }
+    ];
+
+    const metrics = [
+      { icon: "💰", title: "MRR (Monthly Recurring Revenue)", desc: "Track daily. Goal: $600 by Day 60", value: "$10 per customer" },
+      { icon: "📈", title: "CAC (Customer Acquisition Cost)", desc: "Time + money spent per customer", value: "Keep under $2" },
+      { icon: "🔄", title: "Churn Rate", desc: "Customers who cancel monthly", value: "Target: <10%" },
+      { icon: "⚡", title: "Conversion Rate", desc: "Trial to paid or free to paid", value: "Target: 25-30%" },
+      { icon: "🎁", title: "Referral Rate", desc: "Customers who refer others", value: "Target: 20%" },
+      { icon: "💎", title: "LTV (Lifetime Value)", desc: "Total revenue per customer", value: "$120+ (12 months)" }
+    ];
+
+    const channels = [
+      { name: "Reddit", color: "red", pct: "40%", desc: "Highest ROI channel for developers", details: [
+        { label: "Best subreddits:", value: "r/webdev, r/Python, r/learnprogramming" },
+        { label: "Best time:", value: "Tuesday-Thursday 9am EST" },
+        { label: "Expected signups:", value: "20-25 customers" }
+      ]},
+      { name: "Discord", color: "blue", pct: "25%", desc: "High-quality engaged developers", details: [
+        { label: "Best servers:", value: "Python Discord, DevCord, Programming Den" },
+        { label: "Strategy:", value: "Help 10 people → Soft sell once" },
+        { label: "Expected signups:", value: "12-15 customers" }
+      ]},
+      { name: "Twitter/X", color: "cyan", pct: "15%", desc: "Building in public attracts founders", details: [
+        { label: "Best hashtags:", value: "#buildinpublic #indiehackers" },
+        { label: "Post frequency:", value: "Daily revenue updates" },
+        { label: "Expected signups:", value: "8-10 customers" }
+      ]},
+      { name: "Indie Hackers", color: "orange", pct: "10%", desc: "Perfect audience: bootstrappers", details: [
+        { label: "Strategy:", value: "Ask for feedback, not sales" },
+        { label: "Best post type:", value: "Journey posts with metrics" },
+        { label: "Expected signups:", value: "5-6 customers" }
+      ]},
+      { name: "Referrals", color: "purple", pct: "10%", desc: "Happy customers recruit friends", details: [
+        { label: "Program:", value: "Refer 3 = free hosting" },
+        { label: "Launch:", value: "Week 3 (Day 21)" },
+        { label: "Expected signups:", value: "5-7 customers" }
+      ]}
+    ];
+
+    const routine = [
+      {
+        title: "Morning (30 mins)",
+        color: "pink",
+        steps: [
+          "Check overnight signups/revenue (5 mins)",
+          "Respond to all customer messages (10 mins)",
+          "Post daily update on Twitter (5 mins)",
+          "Check Reddit notifications (10 mins)"
+        ]
+      },
+      {
+        title: "Midday (45 mins)",
+        color: "blue",
+        steps: [
+          "Help 5 people in Discord (20 mins)",
+          "Reply to 10 tweets (10 mins)",
+          "Post in 1 Reddit thread (15 mins)"
+        ]
+      },
+      {
+        title: "Evening (45 mins)",
+        color: "green",
+        steps: [
+          "Create 1 piece of content (30 mins)<br><span class='text-sm text-gray-400'>Blog post, video, or tweet thread</span>",
+          "Engage with 5 potential customers (15 mins)"
+        ]
+      },
+      {
+        title: "Weekly Tasks",
+        color: "purple",
+        steps: [
+          "Monday: Plan week's content",
+          "Wednesday: Analyze metrics",
+          "Friday: Reach out to influencers",
+          "Sunday: Customer appreciation"
+        ]
+      }
+    ];
+
+    // === RENDERING FUNCTIONS ===
+    let activeWeek = 1;
+
+    function createParticles() {
+      const animeBg = document.getElementById('animeBg');
+      const particleCount = 40;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 80 + 20;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.top = `${Math.random() * 100}vh`;
+        particle.style.animationDelay = `${Math.random() * 15}s`;
+        animeBg.appendChild(particle);
+      }
+    }
+
+    function renderWeekSelector() {
+      const container = document.getElementById('weekSelector');
+      container.innerHTML = '';
+      weeks.forEach(w => {
+        const btn = document.createElement('button');
+        btn.className = `week-btn ${activeWeek === w.week ? 'active' : ''}`;
+        btn.textContent = `Week ${w.week}`;
+        btn.onclick = () => {
+          activeWeek = w.week;
+          renderWeekSelector();
+          renderWeekDetails();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderWeekDetails() {
+      const container = document.getElementById('weekDetails');
+      const week = weeks.find(w => w.week === activeWeek);
+      if (!week) return;
+
+      let tasksHtml = '';
+      week.tasks.forEach(task => {
+        tasksHtml += `
+          <div class="task-card">
+            <div class="task-icon">
+              <i class="${task.icon}"></i>
+            </div>
+            <div>
+              <h3 class="task-title">${task.title}</h3>
+              <div class="task-day">${task.day}</div>
+              <ul class="task-items">
+                ${task.items.map(item => `<li>${item}</li>`).join('')}
+              </ul>
+              <div class="trick-box">
+                <div class="trick-text">${task.trick}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="week-header">
+          <h2 class="week-title">${week.title}</h2>
+          <p class="week-subtitle">${week.days} • ${week.theme}</p>
+          <div class="week-meta">
+            <div class="meta-item">
+              <div class="meta-label">REVENUE TARGET</div>
+              <div class="meta-value">${week.revenue}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">CUSTOMERS</div>
+              <div class="meta-value">${week.customers}</div>
+            </div>
+          </div>
+        </div>
+        <div class="tasks-container">
+          ${tasksHtml}
+        </div>
+      `;
+    }
+
+    function renderTricks() {
+      const container = document.getElementById('tricksGrid');
+      container.innerHTML = tricks.map((t, i) => `
+        <div class="trick-card">
+          <div>
+            <span class="trick-number">${i+1}</span>
+            <span class="trick-title">${t.title}</span>
+          </div>
+          <p class="trick-desc">${t.desc}</p>
+          <div class="trick-impact">💰 Impact: ${t.impact}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderTimeline() {
+      const container = document.getElementById('timelineContainer');
+      container.innerHTML = timelineData.map(t => `
+        <div class="timeline-item">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+            <strong>${t.week}</strong>
+            <span style="font-family:'Orbitron';font-size:1.5rem;color:var(--success);">${t.revenue}</span>
+          </div>
+          <div class="timeline-bar">
+            <div class="timeline-fill" style="width:${t.width}"></div>
+          </div>
+          <p style="font-size:0.9rem;color:#aaa;margin-top:0.5rem;">${t.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderMetrics() {
+      const container = document.getElementById('metricsGrid');
+      container.innerHTML = metrics.map(m => `
+        <div class="metric-card">
+          <div class="metric-icon">${m.icon}</div>
+          <div class="metric-title">${m.title}</div>
+          <p style="color:#bbb;margin-bottom:1rem;">${m.desc}</p>
+          <div class="metric-value">${m.value}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderChannels() {
+      const container = document.getElementById('channelsContainer');
+      const colors = {
+        red: 'var(--danger)',
+        blue: 'var(--anime-blue)',
+        cyan: 'var(--secondary)',
+        orange: 'var(--anime-yellow)',
+        purple: 'var(--anime-purple)'
+      };
+      container.innerHTML = channels.map(c => `
+        <div class="channel-card" style="border-left-color:${colors[c.color]}">
+          <div class="channel-header">
+            <div class="channel-name" style="color:${colors[c.color]}">${c.name}</div>
+            <div class="channel-pct">${c.pct}</div>
+          </div>
+          <p style="color:#bbb;margin-bottom:1rem;">${c.desc}</p>
+          <div style="font-size:0.9rem;">
+            ${c.details.map(d => `<div style="display:flex;justify-content:space-between;"><span>${d.label}</span> <span style="color:var(--secondary);">${d.value}</span></div>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderRoutine() {
+      const container = document.getElementById('routineGrid');
+      const colors = {
+        pink: 'var(--anime-pink)',
+        blue: 'var(--anime-blue)',
+        green: 'var(--success)',
+        purple: 'var(--anime-purple)'
+      };
+      container.innerHTML = routine.map(r => `
+        <div class="routine-card" style="border:1px solid ${colors[r.color]}">
+          <div class="routine-title" style="color:${colors[r.color]}">${r.title}</div>
+          <ul class="routine-list">
+            ${r.steps.map((step, i) => `
+              <li>
+                <span class="routine-step" style="background:${colors[r.color]}">${i+1}</span>
+                <span>${step}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    // === INIT ===
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      renderWeekSelector();
+      renderWeekDetails();
+      renderTricks();
+      renderTimeline();
+      renderMetrics();
+      renderChannels();
+      renderRoutine();
+    });
+  </script>
+</body>
+</html>
